@@ -161,7 +161,7 @@
                         </div>
 
                         <input id="oldprofile" type="hidden" class="@error('oldprofile') is-invalid @enderror" name="oldprofile" value="{{ $profile->profilePic }}"  autocomplete="oldprofile" autofocus>
-
+                        
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-success float-right">
