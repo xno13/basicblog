@@ -150,7 +150,7 @@
                             <label for="profilePic" class="col-md-4 col-form-label text-md-right">{{ __('ProfilePic') }}</label>
 
                             <div class="col-md-6">
-                                <input id="profilePic" type="file" class="@error('profilePic') is-invalid @enderror" name="profilePic" value="{{ old('profilePic') }}"  autocomplete="profilePic" autofocus>
+                                <input id="profilePic" type="file" class="@error('profilePic') is-invalid @enderror" name="profilePic" autocomplete="profilePic" autofocus>
 
                                 @error('profilePic')
                                     <span class="invalid-feedback" role="alert">
@@ -159,6 +159,8 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <input id="oldprofile" type="hidden" class="@error('oldprofile') is-invalid @enderror" name="oldprofile" value="{{ $profile->profilePic }}"  autocomplete="oldprofile" autofocus>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

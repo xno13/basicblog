@@ -10,7 +10,7 @@ class ProfilesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['']]);
+        $this->middleware('auth', ['except' => ['show']]);
     }
 
     public function show($id)
@@ -31,7 +31,7 @@ class ProfilesController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:8|confirmed',
             'phone' => 'required|string|max:15',
             'mobile' => 'required|string|max:11',
@@ -39,13 +39,18 @@ class ProfilesController extends Controller
             'city' => 'required|string',
             'state' => 'required|string',
             'zip' => 'required|integer',
-            'profilePic' => 'required|mimes:jpg,png,jpeg|max:25000'
+            'profilePic' => 'mimes:jpg,png,jpeg|max:25000'
         ]);
+        
+        $newProfileName = $request->input('oldprofile');
 
-        $newProfileName = time() . '-' . $request->name . '.' . $request->profilePic->extension();
+        if($request->profilePic)
+        {
+            $newProfileName = time() . '-' . $request->name . '.' . $request->profilePic->extension();
 
-        $request->profilePic->move(public_path('images'), $newProfileName);
-
+            $request->profilePic->move(public_path('images'), $newProfileName);
+        }
+        
         $profile = User::where('id', $id)->update([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
