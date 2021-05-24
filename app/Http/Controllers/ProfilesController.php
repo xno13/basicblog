@@ -44,8 +44,7 @@ class ProfilesController extends Controller
         
         $newProfileName = $request->input('oldprofile');
 
-        if($request->profilePic)
-        {
+        if($request->profilePic){
             $newProfileName = time() . '-' . $request->name . '.' . $request->profilePic->extension();
 
             $request->profilePic->move(public_path('images'), $newProfileName);
